@@ -4,6 +4,7 @@
 
 import random
 import string
+import requests
 
 class Game():
     def __init__(self):
@@ -15,4 +16,6 @@ class Game():
         for i in range(0, len(word)):
             if list(word)[i] not in self.grid:
                 return False
-        return True
+        dict_request = requests.get(f"https://wagon-dictionary.herokuapp.com/{word}")
+        dict_json = dict_request.json()
+        return dict_json['found']
